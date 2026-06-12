@@ -1726,7 +1726,7 @@ function renderStock(filter = '') {
   empty.style.display = stockItems.length === 0 ? 'block' : 'none';
 }
 
-async async function cycleStatus(id) {
+async function cycleStatus(id) {
   const item = stockItems.find(s => s.id === id);
   if (!item) return;
   item.status = STATUS_CYCLE[item.status || 'available'];
@@ -1743,7 +1743,7 @@ function getStockStatus(name) {
   return found ? (found.status || 'available') : null;
 }
 
-async async function addStock(name) {
+async function addStock(name) {
   name = name.trim();
   if (!name) return;
   if (stockItems.find(s => s.name.toLowerCase() === name.toLowerCase())) return;
@@ -1757,7 +1757,7 @@ async async function addStock(name) {
   renderStock(document.getElementById('stock-search').value);
 }
 
-async async function deleteStock(id) {
+async function deleteStock(id) {
   const { error } = await db.from('stock_items').delete().eq('id', id);
   if (error) { console.error(error); return; }
   stockItems = stockItems.filter(s => s.id !== id);
